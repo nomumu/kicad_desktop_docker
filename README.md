@@ -1,6 +1,8 @@
 # kicad_desktop_docker
 A package that builds docker image for KiCad using noVNC.
 
+![image](https://user-images.githubusercontent.com/34224090/134472668-44e86380-3eb7-4ab2-8bb9-c19618cc00b0.png)  
+
 ## Overview
 このソフトウェアはDockerコンテナ内にnoVNCアクセス可能なGNOMEデスクトップを起動し、KiCadの実行環境を提供します．
 
@@ -71,12 +73,26 @@ http://192.168.x.xxx:15900/vnc.html
 
 ## KiCad
 メニューからKiCadを起動することができます．  
+
+![image](https://user-images.githubusercontent.com/34224090/134477367-350aadbf-d0b5-4e3b-b63c-4f8aa37847ab.png)  
+
 動作確認を行いたい場合、`/usr/shara/kicad/demos/`にデモプロジェクトがインストールされているので利用して下さい．  
 
+このDocker環境はVirtualGLを利用してKiCadの3D機能を処理するように設定されています．次のダイアログでは`アクセラレーターを有効化`を選択することが可能です．  
+
+![image](https://user-images.githubusercontent.com/34224090/134478189-dfd1be81-d03b-4c8b-866b-c3d9aac868e9.png)  
+
+保存が必要なライブラリは`/home/<your kicad user>/`以下に設置するよう適切に設定して下さい．  
+
+![image](https://user-images.githubusercontent.com/34224090/134479151-e37f9623-1c78-4384-b6e0-fa06edac6d5b.png)  
 ## Save
 Docker環境内の`/home/<your kicad user>/`以下に保存されたデータは維持されます．  
 基板データなどの取り出しはマウントした`homedir`へ直接アクセスする運用が可能です．  
 
-
-
-
+## Tips
+- F11などでフルスクリーンに切り替えると有効になるショートカットが増えるので有効活用して下さい
+- 日本語キーボードの`全角/半角`キーで日本語入力が可能な設定を施しています
+  - ファイル名や設計メモなどに利用して下さい
+  - KiCad 5.1は日本語入力に対応していません
+- 複数人数での接続に対応していますのでレビューなどにも有効活用して下さい
+  - 画面のリサイズを複数接続で有効にすると最後のリサイズが反映されます
