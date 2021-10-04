@@ -23,11 +23,12 @@ echo -e "#!/bin/sh\n\n" \
     "export GTK_IM_MODULE=\"ibus\"\n\n" \
     "dbus-launch gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'jp'),('ibus', 'mozc-jp')]\"\n" \
     "dbus-launch gsettings set org.gnome.desktop.interface cursor-theme \"DMZ-White\"\n" \
+    "dbus-launch gsettings set org.gnome.desktop.screensaver lock-enabled \"false\"\n" \
     "dbus-launch gnome-session --session=gnome-flashback-metacity --disable-acceleration-check --debug &\n" \
     "gnome-terminal &\n" \
     "LANG=setup xdg-user-dirs-update &" > ~/.vnc/xstartup
 fi
 
 echo $1 | sudo -S /etc/init.d/dbus start
-vncserver :0 -geometry 1440x900 -SecurityTypes None --I-KNOW-THIS-IS-INSECURE
+vncserver :0 -geometry 1440x900 -SecurityTypes None --I-KNOW-THIS-IS-INSECURE -IdleTimeout 3000
 websockify --web=/usr/share/novnc/ 15900 localhost:5900
