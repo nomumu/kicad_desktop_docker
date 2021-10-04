@@ -28,6 +28,6 @@ echo -e "#!/bin/sh\n\n" \
     "LANG=setup xdg-user-dirs-update &" > ~/.vnc/xstartup
 fi
 
-sudo /etc/init.d/dbus start
-vncserver :0 -geometry 1440x900
+echo $1 | sudo -S /etc/init.d/dbus start
+vncserver :0 -geometry 1440x900 -SecurityTypes None --I-KNOW-THIS-IS-INSECURE
 websockify --web=/usr/share/novnc/ 15900 localhost:5900
