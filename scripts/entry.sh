@@ -2,6 +2,7 @@
 
 if [ ! -e ~/.vnc ]; then
     mkdir -p ~/.vnc
+    ln -s /usr/share/novnc/download ~/to_download
 echo -e "#!/bin/sh\n\n" \
     "unset SESSION_MANAGER\n" \
     "unset DBUS_SESSION_BUS_ADDRESS\n\n" \
