@@ -4,7 +4,6 @@ A package that builds docker image for KiCad using noVNC.
 ![image](https://user-images.githubusercontent.com/34224090/134472668-44e86380-3eb7-4ab2-8bb9-c19618cc00b0.png)  
 
 ## Overview
------
 このソフトウェアはDockerコンテナ内にnoVNCアクセス可能なGNOMEデスクトップを起動し、KiCadの実行環境を提供します．
 
 ### System Requirements
@@ -32,7 +31,6 @@ A package that builds docker image for KiCad using noVNC.
   - 5.1
 
 ## Build
------
 次のようにdockerイメージを構築します．
 
 ```
@@ -42,7 +40,6 @@ kicad_desktop_docker$ docker build . -t kicad_desktop_docker
 ```
 
 ## Run
------
 実行用のスクリプトでDocker環境を起動します．
 
 ### Command
@@ -68,7 +65,6 @@ http://192.168.x.xxx:15900/vnc.html
   - PORT_NUMBER: デスクトップ接続用ポートを指定します
 
 ## KiCad
------
 デスクトップ環境ではメニューからKiCadを起動することができます．  
 
 ![image](https://user-images.githubusercontent.com/34224090/134477367-350aadbf-d0b5-4e3b-b63c-4f8aa37847ab.png)  
@@ -84,17 +80,14 @@ http://192.168.x.xxx:15900/vnc.html
 ![image](https://user-images.githubusercontent.com/34224090/134479151-e37f9623-1c78-4384-b6e0-fa06edac6d5b.png)  
 
 ## Save
------
 Docker環境内の`/home/<your kicad user>/`以下に保存されたデータは維持されます．  
 基板データなどの取り出しはマウントした`homedir`へ直接アクセスする運用が可能です．  
 
 ## Download
------
 `/home/<your kicad user>/to_download/`の中に格納したファイルは`http://192.168.x.xxx:15900/download/`からダウンロードすることが可能です．ガーバーデータの取り出しなどに利用して下さい．  
 このディレクトリの内容はDockerコンテナを停止すると削除されるため一時領域として扱って下さい．
 
 ## Tips
------
 - F11などでフルスクリーンに切り替えると有効になるショートカットが増えるので有効活用して下さい
 - 日本語キーボードの`全角/半角`キーで日本語入力が可能な設定を施しています
   - ファイル名や設計メモなどに利用して下さい
