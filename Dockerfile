@@ -16,7 +16,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update -y && apt-get install -y --no-install-recommends ubuntu-gnome-desktop \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN apt-get update -y && apt-get install -y gnome-characters gnome-calculator gnome-shell-extension-desktop-icons gnome-font-viewer xfonts-scalable gedit vim xcursor-themes fonts-ubuntu nautilus-extension-gnome-terminal gir1.2-freedesktop gir1.2-gnomedesktop-3.0 gnome-shell-extensions gnome-themes-standard gnome-session-flashback gnome-shell-extension-prefs libegl1-mesa nautilus sudo wget gpg-agent \
-    novnc websockify tigervnc-standalone-server openssh-server \
+    websockify tigervnc-standalone-server openssh-server \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN wget -q https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg -O- | apt-key add - \
     && wget -q https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -O- | apt-key add - \
@@ -38,6 +38,9 @@ RUN cd /usr/share/ \
     && git clone -b 5.1 https://github.com/KiCad/kicad-i18n.git \
     && cd kicad-i18n && mkdir build && cd build \
     && cmake .. && make install
+RUN cd /usr/share \
+    && git clone https://github.com/novnc/noVNC.git novnc \
+    && cd novnc && git checkout 463c39e4af98ec4106b87bbea17e1605aa4c6180
 
 #UI settings
 RUN sed -i -e 's/<option value="remote">/<option value="remote" selected>/g' /usr/share/novnc/vnc.html
