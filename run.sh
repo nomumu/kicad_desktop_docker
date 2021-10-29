@@ -12,4 +12,4 @@ docker run --name $CONTAINER_NAME \
         --mount type=bind,src=/etc/shadow,dst=/etc/shadow,ro \
         --mount type=bind,src=`pwd`/homedir,dst=/home/$USER \
         -p $NOVNC_PORT:15900 \
-        kicad_desktop_docker $PASSWORD
+	kicad_desktop_docker

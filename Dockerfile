@@ -51,6 +51,8 @@ RUN sed -i -e 's/Exec=eeshema/Exec=vglrun eeshema/g' /usr/share/applications/ees
 RUN sed -i -e 's|<layout>default</layout>|<layout>jp</layout>|g' /usr/share/ibus/component/mozc.xml
 RUN mkdir -p /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
+RUN mkdir /var/run/dbus && chmod 777 /var/run/dbus
+
 COPY scripts/setup_vgl.sh /tmp/setup_vgl.sh
 RUN /tmp/setup_vgl.sh
 

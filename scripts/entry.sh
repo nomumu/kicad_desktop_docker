@@ -30,6 +30,6 @@ echo -e "#!/bin/sh\n\n" \
     "LANG=setup xdg-user-dirs-update &" > ~/.vnc/xstartup
 fi
 
-echo $1 | sudo -S /etc/init.d/dbus start
+/etc/init.d/dbus start --user
 vncserver :0 -geometry 1440x900 -SecurityTypes None --I-KNOW-THIS-IS-INSECURE -IdleTimeout 3000
 websockify --web=/usr/share/novnc/ 15900 localhost:5900
