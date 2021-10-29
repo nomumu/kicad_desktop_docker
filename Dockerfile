@@ -1,9 +1,6 @@
 FROM ubuntu:focal
 LABEL maintainer="nomumu <nomumu-github@koso2-dan.ddo.jp>"
 
-COPY setup_vgl.sh /tmp/setup_vgl.sh
-COPY entry.sh /tmp/entry.sh
-
 RUN apt-get update -y && apt-get install -y apt-utils
 RUN apt-get update -y && apt-get install -y tzdata
 ENV TZ=Asia/Tokyo \
@@ -54,6 +51,10 @@ RUN sed -i -e 's/Exec=eeshema/Exec=vglrun eeshema/g' /usr/share/applications/ees
 RUN sed -i -e 's|<layout>default</layout>|<layout>jp</layout>|g' /usr/share/ibus/component/mozc.xml
 RUN mkdir -p /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
+COPY scripts/setup_vgl.sh /tmp/setup_vgl.sh
 RUN /tmp/setup_vgl.sh
+
+COPY scripts/entry.sh /tmp/entry.sh
+
 ENTRYPOINT ["/tmp/entry.sh"]
 
