@@ -39,8 +39,9 @@ RUN cd /usr/share/ \
     && cd kicad-i18n && mkdir build && cd build \
     && cmake .. && make install
 RUN cd /usr/share \
-    && git clone https://github.com/novnc/noVNC.git novnc \
-    && cd novnc && git checkout 463c39e4af98ec4106b87bbea17e1605aa4c6180
+    && git clone -b v1.3.0  https://github.com/novnc/noVNC.git novnc \
+    && cd novnc && mkdir download && chmod 777 download \
+    && cd download && touch "THIS_DIRECTORY_IS_TEMPORARY!!"
 
 #UI settings
 RUN sed -i -e 's/<option value="remote">/<option value="remote" selected>/g' /usr/share/novnc/vnc.html
