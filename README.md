@@ -24,7 +24,7 @@ A package that builds docker image for KiCad using noVNC.
 - Ubuntu
   - 20.04 (focal)
 - [KiCad](https://www.kicad.org/)
-  - 5.1 release ver
+  - 6.0 release ver
 - [VirtualGL](https://www.virtualgl.org/)
   - 2.6.5
 - [kicad-i18n](https://github.com/KiCad/kicad-i18n.git)
@@ -91,7 +91,6 @@ Docker環境内の`/home/<your kicad user>/`以下に保存されたデータは
 - F11などでフルスクリーンに切り替えると有効になるショートカットが増えるので有効活用して下さい
 - 日本語キーボードの`全角/半角`キーで日本語入力が可能な設定を施しています
   - ファイル名や設計メモなどに利用して下さい
-  - KiCad 5.1は日本語入力に対応していません
 - 複数人数での接続に対応していますのでレビューなどにも有効活用して下さい
   - 画面のリサイズを複数接続で有効にすると最後のリサイズが反映されます
 - 一部環境とブラウザの組み合わせでキーコードに処理に問題がある場合があります
