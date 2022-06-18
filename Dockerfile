@@ -3,6 +3,10 @@ LABEL maintainer="nomumu <nomumu-github@koso2-dan.ddo.jp>"
 
 RUN apt-get update -y && apt-get install -y apt-utils
 RUN apt-get update -y && apt-get install -y tzdata
+RUN apt-get update -y && apt-get install -y locales \
+    && apt-get install -y language-pack-ja language-pack-en \
+    && locale-gen ja_JP.UTF-8 \
+    && update-locale LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo \
     DISPLAY=:0 \
     LANGUAGE=ja_JP.UTF-8 \
@@ -27,14 +31,14 @@ RUN cd /tmp \
     && dpkg -i virtualgl_2.6.5_amd64.deb \
     && rm virtualgl_2.6.5_amd64.deb
 
-RUN add-apt-repository -y ppa:kicad/kicad-5.1-releases \
+RUN add-apt-repository -y ppa:kicad/kicad-6.0-releases \
     && apt-get update -y \
-    && apt-get install -y kicad kicad-doc-ja kicad-demos \
+    && apt-get install --install-recommends kicad kicad-doc-ja -y\
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN cd /usr/share/ \
     && git clone -b 5.1 https://github.com/KiCad/kicad-i18n.git \
     && cd kicad-i18n && mkdir build && cd build \
-    && cmake .. && make install
+    && cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make install 
 RUN cd /usr/share \
     && git clone -b v1.3.0  https://github.com/novnc/noVNC.git novnc \
     && cd novnc && mkdir download && chmod 777 download \
@@ -42,12 +46,12 @@ RUN cd /usr/share \
 
 #UI settings
 RUN sed -i -e 's/<option value="remote">/<option value="remote" selected>/g' /usr/share/novnc/vnc.html
-RUN sed -i -e 's/Exec=kicad/Exec=vglrun kicad/g' /usr/share/applications/kicad.desktop
-RUN sed -i -e 's/Exec=pcbnew/Exec=vglrun pcbnew/g' /usr/share/applications/pcbnew.desktop
-RUN sed -i -e 's/Exec=pcb_calculator/Exec=vglrun pcb_calculator/g' /usr/share/applications/pcbcalculator.desktop
-RUN sed -i -e 's/Exec=gerbview/Exec=vglrun gerbview/g' /usr/share/applications/gerbview.desktop
-RUN sed -i -e 's/Exec=bitmap2component/Exec=vglrun bitmap2component/g' /usr/share/applications/bitmap2component.desktop
-RUN sed -i -e 's/Exec=eeshema/Exec=vglrun eeshema/g' /usr/share/applications/eeschema.desktop
+RUN sed -i -e 's/Exec=kicad/Exec=vglrun kicad/g' /usr/share/applications/org.kicad.kicad.desktop
+RUN sed -i -e 's/Exec=pcbnew/Exec=vglrun pcbnew/g' /usr/share/applications/org.kicad.pcbnew.desktop
+RUN sed -i -e 's/Exec=pcb_calculator/Exec=vglrun pcb_calculator/g' /usr/share/applications/org.kicad.pcbcalculator.desktop
+RUN sed -i -e 's/Exec=gerbview/Exec=vglrun gerbview/g' /usr/share/applications/org.kicad.gerbview.desktop
+RUN sed -i -e 's/Exec=bitmap2component/Exec=vglrun bitmap2component/g' /usr/share/applications/org.kicad.bitmap2component.desktop
+RUN sed -i -e 's/Exec=eeshema/Exec=vglrun eeshema/g' /usr/share/applications/org.kicad.eeschema.desktop
 RUN sed -i -e 's|<layout>default</layout>|<layout>jp</layout>|g' /usr/share/ibus/component/mozc.xml
 RUN mkdir -p /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
